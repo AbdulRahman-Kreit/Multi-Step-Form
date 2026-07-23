@@ -11,6 +11,8 @@ import { stepContainer } from "../utils/styles";
 import { headingContainer } from "../utils/styles";
 import { heading } from "../utils/styles";
 import { description } from "../utils/styles";
+import { nextStepButton } from "../utils/styles";
+import { goBackButton } from "../utils/styles";
 
 type Card = {
     id: number,
@@ -49,9 +51,13 @@ export default function SelectPlan() {
         dispatch({ type: "NEXT_STEP" });
     };
 
+    const handleGoingBack = () => {
+        dispatch({ type: "PREV_STEP" });
+    };
+
     // Style Varaibles
     const cardsContainer = `flex flex-col md:flex-row gap-3 md:gap-4 w-full 
-    my-4 md:my-6`;
+    my-2 md:my-4`;
 
     const baseCardStyle = `flex flex-row md:flex-col items-center md:items-start 
     justify-start md:justify-between p-4 md:p-5 w-full md:w-[125px] md:flex-1 
@@ -92,23 +98,46 @@ export default function SelectPlan() {
                                     {card.name}
                                 </h3>
                                 <p className="text-[#9699ab] text-[16px] font-normal">
-                                    ${card.value}/mo
+                                    {!isYearly ? 
+                                    `$${card.value}/mo` : 
+                                    `$${card.value * 10}/yr`}
+                                </p>
+                                <p className={isYearly ? `text-sm text-[#03336d]` : `hidden`}>
+                                    2 months free
                                 </p>
                             </div>
                         </button>
                     );
                 })}
             </div>
-            <div className="">
-                <span className="">
+            <div className="flex flex-row justify-around items-center w-full 
+            bg-[#e9e7ff] p-4 mt-4 main-font font-semibold rounded-lg">
+                <span className={!isYearly ? 'text-[#022959]' : 'text-[#9699ab]'}>
                     Monthly
                 </span>
-                <div className="">
-                    <div onClick={() => setIsYearly(true)} className=""></div>
-                </div>
-                <span className="">
+                <button type="button" onClick={() => setIsYearly(!isYearly)} 
+                className="w-10 h-5 rounded-2xl bg-[#022959] cursor-pointer">
+                    <div className={`w-4 h-4 rounded-2xl bg-white  duration-200
+                    ${isYearly ? 'ml-5.5' : 'ml-0.5'}`}></div>
+                </button>
+                <span className={isYearly ? 'text-[#022959]' : 'text-[#9699ab]'}>
                     Yearly
                 </span>
+            </div>
+            <div className="flex justify-between w-full mt-8 md:mt-auto pt-4">
+                <button 
+                    type="button" 
+                    onClick={handleGoingBack}
+                    className={goBackButton}
+                >
+                    Go Back
+                </button>
+                <button 
+                    type="submit" 
+                    className={nextStepButton}
+                >
+                    Next Step
+                </button>
             </div>
         </form>
     )

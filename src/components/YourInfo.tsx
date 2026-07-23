@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
 // Style Variables
-import { stepContainer } from "../utils/styles";
+import { nextStepButton, stepContainer } from "../utils/styles";
 import { headingContainer } from "../utils/styles";
 import { heading } from "../utils/styles";
 import { description } from "../utils/styles";
@@ -123,7 +123,7 @@ export default function YourInfo() {
             <div className="flex justify-end mt-8 md:mt-auto pt-4">
                 <button 
                     type="submit" 
-                    className="bg-[#022959] hover:bg-[#16425b] text-white font-medium text-sm md:text-base py-3 px-6 md:px-7 rounded-lg transition-colors cursor-pointer"
+                    className={nextStepButton}
                 >
                     Next Step
                 </button>

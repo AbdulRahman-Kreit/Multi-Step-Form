@@ -11,8 +11,8 @@ export default function Form() {
     const { activeStep } = useContext(StepContext);
 
     return (
-        <div className="flex flex-col md:flex-row w-full md:w-220 h-154
-        bg-white p-4 rounded-lg shadow-xl">
+        <div className="flex flex-col md:flex-row w-full md:w-220 lg:w-248 md:h-154
+        lg:h-174 bg-white p-4 rounded-lg shadow-xl">
             <Steps />
             { activeStep === 1 ? 
                 <YourInfo /> : 

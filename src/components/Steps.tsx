@@ -25,7 +25,7 @@ export default function Steps() {
             {stepsData.map((step, index) => {
                 return (
                     <div key={index} className="flex flex-row text-white
-                    uppercase mb-5">
+                    uppercase md:mb-8">
                         <span className={ step.id === activeStep ? 
                             `flex items-center justify-center 
                             w-9 h-9 rounded-full border-2 border-[#BEE2FF] 
