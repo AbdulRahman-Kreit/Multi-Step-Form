@@ -1,10 +1,8 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
-// Icons
-import Arcade from '../../public/icon-arcade.svg';
-import Advanced from '../../public/icon-advanced.svg';
-import Pro from '../../public/icon-pro.svg';
+// Data
+import { planCards } from "../utils/data";
 
 // Style Variables
 import { stepContainer } from "../utils/styles";
@@ -14,20 +12,7 @@ import { description } from "../utils/styles";
 import { nextStepButton } from "../utils/styles";
 import { goBackButton } from "../utils/styles";
 
-type Card = {
-    id: number,
-    icon: string,
-    alt: string,
-    name: string,
-    value: number,
-    planKey: 'arcade' | 'advanced' | 'pro'
-}
 
-const planCards: Card[] = [
-    { id: 1, icon: Arcade, alt: 'Arcade Icon', name: 'Arcade', value: 9, planKey: 'arcade' },
-    { id: 2, icon: Advanced, alt: 'Advanced Icon', name: 'Advanced', value: 12, planKey: 'advanced' },
-    { id: 3, icon: Pro, alt: 'Pro Icon', name: 'Pro', value: 15, planKey: 'pro' },
-]
 
 export default function SelectPlan() { 
     const context = useContext(StepContext);

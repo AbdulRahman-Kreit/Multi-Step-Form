@@ -74,7 +74,7 @@ function stepReducer(state: State, action: StepAction) {
         case "SET_STEP":
             return {
                 ...state, 
-                activeState: action.payload,
+                activeStep: action.payload,
                 errors: {}
             }
         
@@ -100,6 +100,7 @@ export const StepContext = createContext<StepContextType | undefined>(undefined)
 export default function StepProvider({ children } : { children : React.ReactNode }) {
     const [state, dispatch] = useReducer(stepReducer, initialState, initForm);
     const [isYearly, setIsYearly] = useState<boolean>(initPeriod);
+    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
     
     useEffect(() => {
         try {
@@ -117,6 +118,10 @@ export default function StepProvider({ children } : { children : React.ReactNode
         }
     }, [isYearly]);
 
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen);
+    }
+
     return (
         <StepContext.Provider value={{
             activeStep: state.activeStep,
@@ -124,6 +129,8 @@ export default function StepProvider({ children } : { children : React.ReactNode
             errors: state.errors,
             dispatch,
             isYearly,
+            isPopupOpen,
+            togglePopup,
             setIsYearly
         }}>
             {children}

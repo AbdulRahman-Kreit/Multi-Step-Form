@@ -1,5 +1,5 @@
 export const stepContainer = `flex flex-col flex-1 px-4 py-6 md:px-20 md:py-8 
-h-full`;
+h-full main-font`;
 
 export const headingContainer = `h-22 mb-4`;
 
@@ -10,9 +10,13 @@ font-normal`;
 
 export const nextStepButton = `bg-[#022959] hover:bg-[#16425b] text-white 
 font-medium text-sm md:text-base py-3 px-6 md:px-7 rounded-lg transition-colors 
-cursor-pointer`;
+cursor-pointer duration-200`;
 
 export const goBackButton = `text-[#9699ab] duration-200 hover:text-[#022959] 
 font-medium text-sm md:text-base py-3 px-6 md:px-7 rounded-lg transition-colors 
-cursor-pointer`
+cursor-pointer duration-200`;
+
+export const confirmButton = `bg-[#473dff] hover:opacity-50 text-white 
+font-medium text-sm md:text-base py-3 px-6 md:px-7 rounded-lg transition-colors 
+cursor-pointer duration-200`;
 

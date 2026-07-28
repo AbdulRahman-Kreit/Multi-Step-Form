@@ -1,12 +1,15 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+// Data
+import { addOnsCards, planCards } from "../utils/data";
+
 // Style Variables
 import { stepContainer } from "../utils/styles";
 import { headingContainer } from "../utils/styles";
 import { heading } from "../utils/styles";
 import { description } from "../utils/styles";
-import { nextStepButton } from "../utils/styles";
+import { confirmButton } from "../utils/styles";
 import { goBackButton } from "../utils/styles";
 
 export default function Summary() {
@@ -16,7 +19,28 @@ export default function Summary() {
         return null;
     }
 
-    const { formData, dispatch } = context;
+    const { formData, dispatch, isYearly, togglePopup } = context;
+
+    const selectedPlan = planCards.find((card) => card.planKey === formData.plan);
+
+    const planPrice = isYearly ? selectedPlan?.value * 10 : selectedPlan?.value;
+
+    const selectedAddOns = addOnsCards.filter((card) => Boolean(formData[card.key]))
+
+    const addOnsTotalPrice = selectedAddOns.reduce((total, addon) => {
+        const price = isYearly ? addon.value * 10 : addon.value;
+        return total + price;
+    }, 0);
+
+    const totalPrice = planPrice + addOnsTotalPrice;
+
+    const periodText = isYearly ? 'Yearly' : "Monthly";
+    
+    const periodSuffix = isYearly ? 'yr' : 'mo';
+
+    const handlePlanEdit = () => {
+        dispatch({ type: "SET_STEP", payload: 2 });
+    };
 
     const handleGoingBack = () => {
         dispatch({ type: "PREV_STEP" });
@@ -36,57 +60,56 @@ export default function Summary() {
                 {/* Plan */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-[#02295a] font-bold text-base">
-                            Arcade (Yearly)
+                        <h2 className="text-[#02295a] font-bold text-xl">
+                            {selectedPlan?.name} ({periodText})
                         </h2>
 
                         <button
                             type="button"
+                            onClick={handlePlanEdit}
                             className="mt-1 text-sm text-[#9699ab] underline hover:text-[#473dff] transition-colors"
                         >
                             Change
                         </button>
                     </div>
 
-                    <span className="font-bold text-[#02295a] text-base">
-                        $90/yr
+                    <span className="font-bold text-[#02295a] text-xl">
+                        ${planPrice}/{periodSuffix}
                     </span>
                 </div>
 
-                <div className="my-6 h-px bg-[#d6d9e6]" />
+                { selectedAddOns.length > 0 && (
+                    <div className="my-6 h-px bg-[#d6d9e6]" />
+                )}
 
-                {/* Add-ons */}
+
                 <div className="space-y-4">
-                    <div className="flex justify-between">
-                        <span className="text-[#9699ab] text-sm">
-                            Online service
-                        </span>
+                    {selectedAddOns.map((addon) => {
+                        const addonPrice = isYearly ? addon.value * 10 : addon.value;
 
-                        <span className="text-[#02295a] text-sm">
-                            +$10/yr
-                        </span>
-                    </div>
+                        return (
+                            <div key={addon.id} className="flex justify-between">
+                                <span className="text-[#9699ab] text-sm">
+                                    {addon.name}
+                                </span>
 
-                    <div className="flex justify-between">
-                        <span className="text-[#9699ab] text-sm">
-                            Larger storage
-                        </span>
-
-                        <span className="text-[#02295a] text-sm">
-                            +$20/yr
-                        </span>
-                    </div>
+                                <span className="text-[#02295a] text-sm font-medium">
+                                    +${addonPrice}/{periodSuffix}
+                                </span>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
             {/* Total */}
             <div className="mt-8 flex items-center justify-between px-6">
                 <span className="text-sm text-[#9699ab]">
-                    Total (per year)
+                    Total ({isYearly ? 'per year' : 'per month'})
                 </span>
 
                 <span className="text-2xl font-bold text-[#473dff]">
-                    $120/yr
+                    ${totalPrice}/{periodSuffix}
                 </span>
             </div>
 
@@ -102,7 +125,8 @@ export default function Summary() {
 
                 <button
                     type="submit"
-                    className={`${nextStepButton} bg-[#6d3dff] hover:bg-[#6259ff]`}
+                    onClick={togglePopup}
+                    className={`${confirmButton}`}
                 >
                     Confirm
                 </button>

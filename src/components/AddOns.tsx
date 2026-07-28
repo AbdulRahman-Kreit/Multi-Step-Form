@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+// Data
+import { addOnsCards } from "../utils/data";
+
 // Style Variables
 import { stepContainer } from "../utils/styles";
 import { headingContainer } from "../utils/styles";
@@ -9,19 +12,7 @@ import { description } from "../utils/styles";
 import { nextStepButton } from "../utils/styles";
 import { goBackButton } from "../utils/styles";
 
-type Item = {
-    id: number,
-    name: string,
-    description: string,
-    value: number,
-    key: 'onlineService' | 'largerStorage' | 'customizableProfile'
-}
 
-const addOnsCards: Item[] = [
-    { id: 1, name: 'Online service', description: 'Access to multiplayer games', value: 1, key: 'onlineService' },
-    { id: 2, name: 'Larger storage', description: 'Extra 1TB of cloud save', value: 2, key: 'largerStorage' },
-    { id: 3, name: 'Customizable profile', description: 'Custom theme on your profile', value: 2, key: 'customizableProfile' },
-]
 
 export default function AddOns() {
     const context = useContext(StepContext);
