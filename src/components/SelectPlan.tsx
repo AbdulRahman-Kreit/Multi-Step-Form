@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
 // Icons
@@ -30,14 +30,13 @@ const planCards: Card[] = [
 ]
 
 export default function SelectPlan() { 
-    const [isYearly, setIsYearly] = useState<boolean>(false);
     const context = useContext(StepContext);
 
     if (!context) {
         return null;
     }
 
-    const { formData, errors, dispatch } = context;
+    const { formData, dispatch, isYearly, setIsYearly } = context;
 
     const handleSelectPlan = (planKey: 'arcade' | 'advanced' | 'pro') => {
         dispatch({
@@ -66,7 +65,7 @@ export default function SelectPlan() {
     const planCardPassive = `${baseCardStyle} bg-white border-[#d6d9e6] 
     hover:border-[#473dff]`;
 
-    const planCardActive = `${baseCardStyle} bg-[#e9e7ff] border-[#473dff]`;
+    const planCardActive = `${baseCardStyle} bg-[#f8f9ff] border-[#473dff]`;
 
     return (
         <form onSubmit={handleSubmit} className={stepContainer}>
@@ -111,7 +110,7 @@ export default function SelectPlan() {
                 })}
             </div>
             <div className="flex flex-row justify-around items-center w-full 
-            bg-[#e9e7ff] p-4 mt-4 main-font font-semibold rounded-lg">
+            bg-[#f8f9ff] p-4 mt-4 main-font font-semibold rounded-lg">
                 <span className={!isYearly ? 'text-[#022959]' : 'text-[#9699ab]'}>
                     Monthly
                 </span>
