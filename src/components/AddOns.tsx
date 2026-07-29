@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+import { motion } from "framer-motion";
+
 // Data
 import { addOnsCards } from "../utils/data";
 
@@ -42,12 +44,20 @@ export default function AddOns() {
     return (
         <form onSubmit={handleSubmit} className={stepContainer}>
             <div>
-                <div className={headingContainer}>
+                <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className={headingContainer}>
                     <h1 className={heading}>Pick add-ons</h1>
                     <p className={description}>Add-ons help you to enhance your gaming experience.</p>
-                </div>
+                </motion.div>
 
-                <div className="flex flex-col gap-3 md:gap-4 my-4 md:my-6">
+                <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex flex-col gap-3 md:gap-4 my-4 md:my-6">
                     {addOnsCards.map((card) => {
                         const isChecked = Boolean(formData[card.key]);
 
@@ -85,7 +95,7 @@ export default function AddOns() {
                             </label>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
 
             <div className="flex justify-between w-full mt-8 md:mt-auto pt-4">

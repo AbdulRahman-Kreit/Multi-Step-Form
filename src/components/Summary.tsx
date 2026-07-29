@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+import { motion } from "framer-motion";
+
 // Data
 import { addOnsCards, planCards } from "../utils/data";
 
@@ -47,16 +49,25 @@ export default function Summary() {
     };
     
     return (
-        <div className={stepContainer}>
-            <div className={headingContainer}>
+        <div
+        className={stepContainer}>
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={headingContainer}>
                 <h1 className={heading}>Finishing up</h1>
                 <p className={description}>
                     Double-check everything looks OK before confirming.
                 </p>
-            </div>
+            </motion.div>
 
             {/* Summary Card */}
-            <div className="mt-8 rounded-xl bg-blue-50/60 p-6">
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-8 rounded-xl bg-blue-50/60 p-6">
                 {/* Plan */}
                 <div className="flex items-center justify-between">
                     <div>
@@ -100,10 +111,14 @@ export default function Summary() {
                         );
                     })}
                 </div>
-            </div>
+            </motion.div>
 
             {/* Total */}
-            <div className="mt-8 flex items-center justify-between px-6">
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-8 flex items-center justify-between px-6">
                 <span className="text-sm text-[#9699ab]">
                     Total ({isYearly ? 'per year' : 'per month'})
                 </span>
@@ -111,7 +126,7 @@ export default function Summary() {
                 <span className="text-2xl font-bold text-[#473dff]">
                     ${totalPrice}/{periodSuffix}
                 </span>
-            </div>
+            </motion.div>
 
             {/* Buttons */}
             <div className="flex justify-between w-full mt-10 md:mt-auto pt-4">

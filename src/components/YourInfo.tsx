@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+import { motion } from "framer-motion";
+
 // Style Variables
 import { nextStepButton, stepContainer } from "../utils/styles";
 import { headingContainer } from "../utils/styles";
@@ -33,7 +35,11 @@ export default function YourInfo() {
         <form onSubmit={handleSubmit} className={stepContainer}>
             
             <div>
-                <div className={headingContainer}>
+                <motion.div 
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className={headingContainer}>
                     <h1 className={heading}>
                         Personal Info
                     </h1>
@@ -41,9 +47,13 @@ export default function YourInfo() {
                     <p className={description}>
                         Please provide your name, email address, & phone number
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="space-y-4 md:space-y-6">
+                <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="space-y-4 md:space-y-6">
                     
                     <div className="flex flex-col">
                         <div className="flex justify-between items-center mb-1 md:mb-1.5">
@@ -117,7 +127,7 @@ export default function YourInfo() {
                         />
                     </div>
 
-                </div>
+                </motion.div>
             </div>
 
             <div className="flex justify-end mt-8 md:mt-auto pt-4">

@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { StepContext } from "../contexts/StepProvider";
 
+import { motion } from "framer-motion";
+
 // Data
 import { planCards } from "../utils/data";
 
@@ -54,12 +56,20 @@ export default function SelectPlan() {
 
     return (
         <form onSubmit={handleSubmit} className={stepContainer}>
-            <div className={headingContainer}>
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={headingContainer}>
                 <h1 className={heading}>Select your plan</h1>
                 <p className={description}>You have the option of monthly or yearly billing</p>
-            </div>
+            </motion.div>
             
-            <div className={cardsContainer}>
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className={cardsContainer}>
                 {planCards.map((card) => {
                     const isSelected = formData.plan === card.planKey;
 
@@ -93,8 +103,12 @@ export default function SelectPlan() {
                         </button>
                     );
                 })}
-            </div>
-            <div className="flex flex-row justify-around items-center w-full 
+            </motion.div>
+            <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-row justify-around items-center w-full 
             bg-[#f8f9ff] p-4 mt-4 main-font font-semibold rounded-lg">
                 <span className={!isYearly ? 'text-[#022959]' : 'text-[#9699ab]'}>
                     Monthly
@@ -107,7 +121,7 @@ export default function SelectPlan() {
                 <span className={isYearly ? 'text-[#022959]' : 'text-[#9699ab]'}>
                     Yearly
                 </span>
-            </div>
+            </motion.div>
             <div className="flex justify-between w-full mt-8 md:mt-auto pt-4">
                 <button 
                     type="button" 
