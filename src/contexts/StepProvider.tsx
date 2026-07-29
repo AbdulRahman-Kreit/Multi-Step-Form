@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useReducer, useState, useEffect } from 'react';
 import { validateStep } from "../utils/validation";
-import type { MultiStepFormData, StepAction, FormErrors } from '../utils/types';
+import type { MultiStepFormData, StepAction, StepContextType, FormErrors } from '../utils/types';
 
 const initialFormData: MultiStepFormData = {
     name: '',
@@ -95,7 +95,7 @@ function stepReducer(state: State, action: StepAction) {
     }
 }
 
-export const StepContext = createContext(undefined);
+export const StepContext = createContext<StepContextType | undefined>(undefined);
 
 export default function StepProvider({ children } : { children : React.ReactNode }) {
     const [state, dispatch] = useReducer(stepReducer, initialState, initForm);

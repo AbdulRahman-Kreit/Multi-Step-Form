@@ -15,7 +15,13 @@ const stepsData: Item[] = [
 ];
 
 export default function Steps() {
-    const { activeStep } = useContext(StepContext);
+        const context = useContext(StepContext);
+
+    if (!context) {
+        return null;
+    }
+
+    const { activeStep } = context;
 
     return (
         <div className={`flex flex-row md:flex-col items-center md:items-start 

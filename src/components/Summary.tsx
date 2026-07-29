@@ -25,7 +25,9 @@ export default function Summary() {
 
     const selectedPlan = planCards.find((card) => card.planKey === formData.plan);
 
-    const planPrice = isYearly ? selectedPlan?.value * 10 : selectedPlan?.value;
+    const rawPlanPrice = selectedPlan?.value ?? 0;
+
+    const planPrice = isYearly ? rawPlanPrice * 10 : rawPlanPrice;
 
     const selectedAddOns = addOnsCards.filter((card) => Boolean(formData[card.key]))
 

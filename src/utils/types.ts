@@ -22,10 +22,13 @@ export type StepAction =
     | { type: 'UPDATE_FORM_DATA'; payload: Partial<MultiStepFormData> }
     | { type: 'SET_ERRORS', payload: FormErrors };
 
-// export type StepContextType = {
-//     activeStep: number;
-//     formData: MultiStepFormData;
-//     isYearly: boolean,
-//     errors: FormErrors;
-//     dispatch: React.Dispatch<StepAction>;
-// }
+export type StepContextType = {
+    activeStep: number;
+    formData: MultiStepFormData;
+    isYearly: boolean;
+    setIsYearly: React.Dispatch<React.SetStateAction<boolean>>;
+    isPopupOpen: boolean;
+    togglePopup: () => void;
+    errors: FormErrors;
+    dispatch: React.Dispatch<StepAction>;
+}
